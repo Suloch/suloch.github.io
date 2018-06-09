@@ -1,49 +1,53 @@
-
 <!DOCTYPE html>
+<html><head>
 
 <head>
-  <title>Sumit Patel </title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Flavors' rel='stylesheet'>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title>Sumit Patel </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Flavors' rel='stylesheet'>
+    <link rel="icon" type="image/png" href="pictures/favicon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
-  <div class="jumbotron text-center header" style="margin-bottom:0">
-    <h1><a href="alternate/alternate.html" style="color:black;">Sumit Patel</a></h1>
+  <div class="jumbotron text-center" id="newheader" style="margin-bottom:0">
+    <canvas id="canvas-header" width="1366" height="464"></canvas>
+    <div id="main-title">
+      <h1>Sumit Patel</h1>
 
-    <button type="button" class="btn btn-info btn-lg" id="tag-button" data-toggle="modal" data-target="#meaning-modal">
+      <button type="button" class="btn btn-info btn-lg" id="tag-button" data-toggle="modal" data-target="#meaning-modal">
       Cave Dweller
-    </button>
-
-    <div class="modal fade" id="meaning-modal" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Cave Dweller</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <p>A person who doesn't get out much or at all. Very commonly a gamer. Can also be a person who simply feels like he/she doesn't really add up with people.<br><br>
-              <u>Example</u>:<br>
-<i>Person</i>: You need to get out more, you're such a cave dweller!<br>
-<i>Cave dweller</i> : Whatever... *proceeds to play SMITE*</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </button>
+    </div>
+      <div class="modal fade" id="meaning-modal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Cave Dweller</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+              <p>A person who doesn't get out much or at all. Very
+commonly a gamer. Can also be a person who simply feels like he/she
+doesn't really add up with people.<br><br>
+                <u>Example</u>:<br>
+                <i>Person</i>: You need to get out more, you're such a cave dweller!<br>
+                <i>Cave dweller</i> : Whatever... *proceeds to play SMITE*</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
     </div>
-</div>
 
   <nav class="navbar navbar-expand-sm sticky-top navborder">
     <a class="navbar-brand" href="#">Home</a>
@@ -74,7 +78,7 @@
   </div>
   <div class="row">
     <div class="col-md-4 small-container">
-      <img src="profile2.JPG" alt="Sumit Patel" class="info-image">
+      <img src="pictures/profile2.JPG" alt="Sumit Patel" class="info-image">
     </div>
 
     <div class="col-md-3 small-container">
@@ -85,7 +89,7 @@
     </div>
 
     <div class="col-md-4 small-container">
-    </br>Computers fascinate me. My favorite thing is to see computers learn things by themsleves.
+    <br>Computers fascinate me. My favorite thing is to see computers learn things by themsleves.
       I like seeing the world thorugh CNNs. The hardest dilemma that I face all the time is, linux or games.
       I have a quirk of start building things from scratch and doing everything possible from the command-line.
     </div>
@@ -167,4 +171,7 @@
   <br>
   <br>
 </div>
-</body>
+<script src="js/rAF.js"></script>
+<script src="js/animateHeader.js"></script>
+
+</body></html>

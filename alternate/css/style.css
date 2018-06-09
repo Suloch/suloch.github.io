@@ -1,4 +1,16 @@
 
+
+#main-title
+{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%,-50%,0);
+	transform: translate3d(-50%,-50%,0);
+}
+
 .fa
 {
   font-size: 30px;
@@ -39,7 +51,7 @@ body
 {
   font-size: 140%;
   font-family: Flavors;
-  background-image: url("background.png");
+  background-image: url("../pictures/background.png");
 }
 
 .flex-item
@@ -85,11 +97,15 @@ body
 
 .header
 {
-  color: black;
-  background-image: url("header-banner.png");
+  background-image: url("../pictures/header-banner.png");
   background-repeat: no-repeat;
   background-position: center;
   background-color: #ffebbf;
+}
+#newheader
+{
+  background-color: #f46f58;
+  padding: 0;
 }
 .nav-link
 {

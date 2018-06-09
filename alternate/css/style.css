@@ -2,6 +2,8 @@
 
 #main-title
 {
+  width: inherit;
+  height: inherit;
   position: absolute;
   margin: 0;
   padding: 0;

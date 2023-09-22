@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <title>Random God Selector</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+            .modal-body{
+                background-color: antiquewhite;
+            }
+            #mainContainer{
+                overflow: auto;
+                white-space: nowrap;
+            }
+            .godImage{
+                height: 400px;
+                width:250px;
+                object-fit: cover;
+                object-position: 0px 5%
+            }
+        </style>
+    </head>
+    <body>
+        <div class="jumbotron text-center">
+            <h1>Random God Selector</h1>
+            <div id="mainContainer">
+            </div>
+            <button onclick="randomize()" id="mainButton" type="button" class="btn btn-success  btn-lg">Generate</button>
+          </div>
+
+
+
+        
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h1 class="modal-title text-center bg-success"></h1>
+                </div>
+                <div class="modal-body text-center">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+
+    </body>
+</html>
+<script type="text/javascript" src="gods.json"></script>
+
+<script>
+    
+    var mainContainer = document.getElementById("mainContainer")
+    var i = 0;
+
+    for(var god of gods){
+        const imageContainer = document.createElement('div')
+        imageContainer.classList.add("imageContainer")
+        const image = document.createElement('img')
+        image.src = god.card
+        image.classList.add("img-thumbnail")
+        image.classList.add("godImage")
+        image.classList.add("img-responsive")
+        imageContainer.appendChild(image)
+        mainContainer.appendChild(image)
+    }
+    
+    function randomize(){
+        var interval = 3000
+        var smoothFactor = 1
+        var speed = 2000
+        var pos = Math.floor(Math.random()*mainContainer.scrollLeftMax)
+        const i = setInterval(scroll, smoothFactor*20)
+        var j = 0
+        function scroll(){
+            pos = pos + smoothFactor*speed
+            mainContainer.scrollLeft = pos
+            if(pos > mainContainer.scrollLeftMax){
+                pos = 1
+            }
+            if(j == 25){
+                speed /= 2;
+                j = 0
+            }
+            if(interval < 0){
+                mainContainer.scrollLeft = mainContainer.scrollLeft - mainContainer.scrollLeft % 127;
+                ele = parseInt((mainContainer.scrollLeft / mainContainer.scrollLeftMax) * 127);
+                $("#myModal").modal()
+                console.log(mainContainer.children[ele])
+                var modalBody = document.getElementsByClassName("modal-body")[0]
+                modalBody.innerHTML= ""
+                const image = document.createElement('img')
+                image.src = gods[ele].card
+                image.classList.add("img-thumbnail")
+                image.classList.add("godImage")
+                image.classList.add("img-responsive")
+                modalBody.appendChild(image)
+                var modalTitle = document.getElementsByClassName("modal-title")[0]
+                modalTitle.innerText = gods[ele].name 
+                console.log(modalBody)
+                console.log(ele)
+                clearInterval(i)
+            }
+            interval -= 20
+            j++
+
+        }
+    }
+    // setInterval(scroll, smoothFactor*20);
+
+</script>

@@ -79,13 +79,13 @@
         var interval = 3000
         var smoothFactor = 1
         var speed = 2000
-        var pos = Math.floor(Math.random()*mainContainer.scrollLeftMax)
+        var pos = Math.floor(Math.random()*mainContainer.scrollWidth)
         const i = setInterval(scroll, smoothFactor*20)
         var j = 0
         function scroll(){
             pos = pos + smoothFactor*speed
             mainContainer.scrollLeft = pos
-            if(pos > mainContainer.scrollLeftMax){
+            if(pos > mainContainer.scrollWidth){
                 pos = 1
             }
             if(j == 25){
@@ -94,7 +94,7 @@
             }
             if(interval < 0){
                 mainContainer.scrollLeft = mainContainer.scrollLeft - mainContainer.scrollLeft % 127;
-                ele = parseInt((mainContainer.scrollLeft / mainContainer.scrollLeftMax) * 127);
+                ele = parseInt((mainContainer.scrollLeft / mainContainer.scrollWidth) * 127);
                 $("#myModal").modal()
                 console.log(mainContainer.children[ele])
                 var modalBody = document.getElementsByClassName("modal-body")[0]

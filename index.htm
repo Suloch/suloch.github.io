@@ -175,7 +175,7 @@
         }
         render(){
             this.ctx.font = "40px Courier New bold";
-            this.ctx.fillText("Won't Repeat.", 120, 50);
+            this.ctx.fillText("Sumit Patel", 200, 50);
         }
     }
     class SubHeading{
@@ -184,7 +184,7 @@
         }
         render(){
             this.ctx.font = "18px Courier New bold"
-            this.ctx.fillText("You should know my name by now.", 95, 75);
+            this.ctx.fillText("Fun things are fun.", 230, 75);
         }
     }
     class Block{
@@ -326,7 +326,7 @@
         for(const elem of data["1"]["pixel_coordinates"]){
             x = startx+elem[1]*cellSize
             y = starty+elem[0]*cellSize
-            let no = Math.floor(Math.random()* 999)
+            let no = Math.floor(Math.random()* chars.length)
             chars[no].velocity.x = (y - chars[no].position.x) / 2000 * -1
             chars[no].velocity.y = (x - chars[no].position.y) / 2000 * -1
             chars[no].callbacks = [
@@ -361,7 +361,7 @@
             char.position.y = 700;            
         }
         for(const elem of currFrameData["pixel_coordinates"]){
-            let no = Math.floor(Math.random()* 999)
+            let no = Math.floor(Math.random()* chars.length)
             chars[no].position.y = startx+elem[1]*cellSize
             chars[no].position.x = starty+elem[0]*cellSize
             chars[no].render();

@@ -330,38 +330,41 @@
 
     let chars = page.getChars();
     
-    //update position based on velocity
-    for(let char of chars){
-        char.callbacks.push( (time) => {
-            char.position.x = char.position.x + char.velocity.x * time;
-            char.position.y = char.position.y + char.velocity.y * time;
-        })
-    }
+    function init(){
 
-    //gravity
-    for(let char of chars){
-        char.callbacks.push( (time) => {
-            char.velocity.y = char.velocity.y + 0.00009 * time;
-        })
-    }
-    
-    //air resistance
-    for(let char of chars){
-        char.callbacks.push( (time) => {
-            char.velocity.y = char.velocity.y + 
-                ((0.001 * char.velocity.y * char.velocity.y ) / spacing[char.char]) * 
-                time ;
-        })
-    }
-    
-    //bounce
-    for(let char of chars){
-        char.callbacks.push( (time) => {
-            if(char.position.y > 700){
-                char.velocity.y = -0.7 * char.velocity.y;
+            for(let char of chars){
+                char.callbacks.push( (time) => {
+                    char.position.x = char.position.x + char.velocity.x * time;
+                    char.position.y = char.position.y + char.velocity.y * time;
+                })
             }
-        })
+        
+            //gravity
+            for(let char of chars){
+                char.callbacks.push( (time) => {
+                    char.velocity.y = char.velocity.y + 0.00009 * time;
+                })
+            }
+            
+            //air resistance
+            for(let char of chars){
+                char.callbacks.push( (time) => {
+                    char.velocity.y = char.velocity.y + 
+                        ((0.001 * char.velocity.y * char.velocity.y ) / spacing[char.char]) * 
+                        time ;
+                })
+            }
+            
+            //bounce
+            for(let char of chars){
+                char.callbacks.push( (time) => {
+                    if(char.position.y > 700){
+                        char.velocity.y = -0.7 * char.velocity.y;
+                    }
+                })
+            }
     }
+    //update position based on velocity
 
     startx = 80;
     starty = 10;
@@ -447,7 +450,10 @@
     }
 
     function lol(){
+        audio.currentTime = 0
         audio.play()
+        frame = 1
+        init()
         requestAnimationFrame(animate);
         let start, prevtime;
         function animate(time){

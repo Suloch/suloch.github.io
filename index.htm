@@ -1,7 +1,7 @@
  <!DOCTYPE html>
 <html>
     <head>
-    <title>Page Title</title>
+    <title>Sumit Patel</title>
     </head>
     <body>
 
@@ -83,7 +83,40 @@
         ".": 0.3,
         "*": 0.6
     }
+    function getMousePos(canvas, event) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top,
+        };
+    }
+    function isInside(pos, rect) {
+        return pos.x > rect.x && pos.x < rect.x + rect.width && pos.y < rect.y + rect.height && pos.y > rect.y
+    }
+    var gallery_rect = {
+        x: 220,
+        y: 17,
+        width: 90,
+        height: 30,
+    };
+    var blog_rect = {
+        x: 334,
+        y: 17,
+        width: 62,
+        height: 30,
+    };
     var canvas = document.getElementById("testCanvas");
+        canvas.addEventListener('click', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+
+        if (isInside(mousePos, gallery_rect)) {
+            window.location.href = 'blogs.html';
+        } else if(isInside(mousePos, blog_rect)){
+            window.location.href ='gallery.html';
+        }
+        }, 
+    false);
+
     var ctx = canvas.getContext("2d");
 
     class Page{
@@ -91,6 +124,7 @@
             this.ctx = ctx;
             this.heading = new Heading(ctx);
             this.subheading = new SubHeading(ctx);
+            this.navbar = new Navbar(ctx);
             this.Blocks = [
                     new Block(ctx, {x: start.x-115, y: start.y+60},
                     [
@@ -155,6 +189,7 @@
             ];
         }
         render(){
+            this.navbar.render();
             this.heading.render();
             this.subheading.render();
             for(let i = 0; i < this.Blocks.length; i++){
@@ -169,13 +204,23 @@
             return chars;
         }
     }
+
+    class Navbar{
+        constructor(ctx){
+            this.ctx = ctx
+        }
+        render(){
+            this.ctx.font = "24px Courier New bold";
+            this.ctx.fillText("Gallery | Blogs", 220, 40)
+        }
+    }
     class Heading{
         constructor(ctx){
             this.ctx = ctx;
         }
         render(){
             this.ctx.font = "40px Courier New bold";
-            this.ctx.fillText("Sumit Patel", 200, 50);
+            this.ctx.fillText("Sumit Patel", 200, 90);
         }
     }
     class SubHeading{
@@ -184,7 +229,7 @@
         }
         render(){
             this.ctx.font = "18px Courier New bold"
-            this.ctx.fillText("Fun things are fun.", 230, 75);
+            this.ctx.fillText("Fun things are fun.", 230, 115);
         }
     }
     class Block{
@@ -280,7 +325,7 @@
     
 
     
-    let page = new Page(ctx, {x: 120, y: 50});
+    let page = new Page(ctx, {x: 120, y: 100});
     page.render();
 
     let chars = page.getChars();

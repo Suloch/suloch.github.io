@@ -1,0 +1,435 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+    <title>Page Title</title>
+    </head>
+    <body>
+
+
+        
+        <div style="margin-top: 40px; display: flex; justify-content: center;">
+            <canvas id="testCanvas" width="700" height="700" style=" border: 1px solid black;"></canvas>
+        </div>
+    </body>
+
+</html> 
+
+<script type="text/javascript" src="data.js"></script>
+<script>
+    console.log(data)
+    let spacing = {
+        a: 0.6,
+        b: 0.65,
+        c: 0.55,
+        d: 0.6,
+        e: 0.6,
+        f: 0.4,
+        g: 0.6,
+        h: 0.65,
+        i: 0.4,
+        j: 0.4,
+        k: 0.65,
+        l: 0.35,
+        m: 0.9,
+        n: 0.6,
+        o: 0.6,
+        p: 0.6,
+        q: 0.7,
+        r: 0.55,
+        s: 0.55,
+        t: 0.45,
+        u: 0.6,
+        v: 0.6,
+        w: 0.8,
+        x: 0.6,
+        y: 0.6,
+        z: 0.6,
+        A: 0.75,
+        B: 0.75,
+        C: 0.75,
+        D: 0.75,
+        E: 0.75,
+        F: 0.75,
+        G: 0.75,
+        H: 0.9,
+        I: 0.4,
+        J: 0.4,
+        K: 0.8,
+        L: 0.75,
+        M: 0.9,
+        N: 0.8,
+        O: 0.8,
+        P: 0.75,
+        Q: 0.8,
+        R: 0.75,
+        S: 0.75,
+        T: 0.75,
+        U: 0.9,
+        V: 0.75,
+        W: 1,
+        X: 0.75,
+        Y: 0.7,
+        Z: 0.75,
+        " ": 0.2,
+        "⦿": 1,
+        "❀": 1,
+        "(": 0.4,
+        ")": 0.4,
+        ":": 0.4,
+        1: 0.4,
+        0: 0.5,
+        ",": 0.3, 
+        "'": 0.3,
+        ".": 0.3,
+        "*": 0.6
+    }
+    var canvas = document.getElementById("testCanvas");
+    var ctx = canvas.getContext("2d");
+
+    class Page{
+        constructor(ctx, start){
+            this.ctx = ctx;
+            this.heading = new Heading(ctx);
+            this.subheading = new SubHeading(ctx);
+            this.Blocks = [
+                    new Block(ctx, {x: start.x-115, y: start.y+60},
+                    [
+                        "A kudere enthusiast with a persona of a privacy policy. Lengthy and complicated",
+                        "without a purpose which no ones cares to read.",
+                        "(Privacy Policies are subject to change, but I am sure you wouldn't notice anyway.*wink*)."
+                    ],
+                    "Who am I?",
+                    "15px Courier New bold",
+                    "20px Courier New bold"
+
+                ),
+                new Block(ctx, {x: start.x-115, y: start.y+140},
+                    [
+                        "Software developer might be the best answer. Although, in my opinion, I am better at",
+                        "whining at about everything possible.",
+                    ],
+                    "What do I do?",
+                    "15px Courier New bold",
+                    "20px Courier New bold"
+
+                ),
+                new Block(ctx, {x: start.x-115, y: start.y+200},
+                    [
+                        "⦿ Can use chatgpt",
+                        "⦿ Technical",
+                        "   ❀ Python webserver",
+                        "   ❀ Kubernetes",
+                        "   ❀ C",
+                        "⦿ Also making up facts to win arguments."
+                    ],
+                    "What are my skills?",
+                    "15px Courier New bold",
+                    "20px Courier New bold",
+                ),
+                new Block(ctx, {x: start.x-115, y: start.y+320},
+                    [
+                        "⦿ Kudere",
+                        "⦿ Development (Checkout my github for projects)",
+                        "⦿ Art (As frustating as it is, I like to try my hand at it.",
+                        "⦿ Music Galileo Galilei, BBHF.",
+                        "⦿ Memes",
+                        "⦿ Games",
+                        "⦿ Disagreeing for the sake of it"
+
+                    ],
+                    "What do I like?",
+                    "15px Courier New bold",
+                    "20px Courier New bold"
+                ),
+                new Block(ctx, {x: start.x-115, y: start.y+455},
+                    [
+                        "⦿ Ads ",
+                        "⦿ Subscription(buying things that I dont own).",
+                        "⦿ Loans(Subscription with interest)",
+                        "⦿ Games, when I play them.",
+                    ],
+                    "What do I dislike?",
+                    "15px Courier New bold",
+                    "20px Courier New bold"
+                ),
+            ];
+        }
+        render(){
+            this.heading.render();
+            this.subheading.render();
+            for(let i = 0; i < this.Blocks.length; i++){
+                this.Blocks[i].render()
+            }
+        }
+        getChars(){
+            let chars = [];
+            for(let i = 0; i < this.Blocks.length; i++){
+                chars = chars.concat(this.Blocks[i].getChars());
+            }
+            return chars;
+        }
+    }
+    class Heading{
+        constructor(ctx){
+            this.ctx = ctx;
+        }
+        render(){
+            this.ctx.font = "40px Courier New bold";
+            this.ctx.fillText("Won't Repeat.", 120, 50);
+        }
+    }
+    class SubHeading{
+        constructor(ctx){
+            this.ctx = ctx;
+        }
+        render(){
+            this.ctx.font = "18px Courier New bold"
+            this.ctx.fillText("You should know my name by now.", 95, 75);
+        }
+    }
+    class Block{
+        constructor(ctx, start, lines_text, heading_text, line_style, heading_style){
+            this.ctx = ctx;
+            
+            this.heading = new BlockHeading(ctx, start, heading_text, heading_style);
+            
+            let line_start = {x:start.x + 20, y: start.y + 20}
+            this.lines = []
+            for(let i=0; i<lines_text.length; i++){
+                this.lines.push(new Line(ctx,i, line_start, line_style, lines_text[i], 15));
+            }
+        }
+        render(){
+            this.heading.render();
+            for(let i = 0; i < this.lines.length; i++){
+                this.lines[i].render();
+            }
+        }
+        getChars(){
+            let chars = [];
+            for(let i = 0; i < this.lines.length; i++){
+                chars = chars.concat(this.lines[i].chars);
+            }
+            chars = chars.concat(this.heading.getChars())
+            return chars;
+        }
+    }
+    class BlockHeading{
+        constructor(ctx, start, heading_text, heading_style){
+            this.ctx = ctx;
+            this.text = new Line(ctx, 0, start, heading_style, heading_text, 20);
+            this.start = start;
+            this.heading_text = heading_text;
+        }
+        render(){
+            this.text.render();
+
+            ctx.moveTo(this.start.x+4, this.start.y+3);
+            ctx.lineTo(this.heading_text.length*11, this.start.y+3);
+            ctx.stroke();
+        }
+        getChars(){
+            return this.text.chars;
+        }
+    }
+    class Line{
+        constructor(ctx, line, start, font, text, lineWidth){
+            this.chars = [];
+            let x = start.x;
+            let y = start.y + line * lineWidth;
+            for(let i = 0 ; i < text.length; i++){
+                if(i > 0){
+                    x = x + lineWidth * spacing[text[i-1]];
+                }
+                this.chars.push(new Char(ctx, text[i], {x:x, y:y}, font));
+            }
+        }
+        render(){
+            for(let i = 0; i < this.chars.length; i++){
+                this.chars[i].render();
+            }
+        }
+    }
+
+    class Char{
+        constructor(ctx, char, position, font){
+            this.ctx = ctx;
+            this.char = char;
+            this.position = position;
+            this.font = font;
+            this.velocity = {x: 0, y:0};
+            this.callbacks = []
+        }
+
+        render(){
+            this.ctx.font = this.font;
+            this.ctx.fillText(this.char, this.position.x, this.position.y);
+        }
+        update(time){
+            for(let i = 0; i < this.callbacks.length; i++){
+                this.callbacks[i](time);
+            }
+        }
+    }
+
+    // /* Just for checking the output constantly, needs to be removed */
+    // setInterval(() => {
+    //     window.location.reload()
+    // }, 2000);
+
+    
+
+    
+    let page = new Page(ctx, {x: 120, y: 50});
+    page.render();
+
+    let chars = page.getChars();
+    
+    //update position based on velocity
+    for(let char of chars){
+        char.callbacks.push( (time) => {
+            char.position.x = char.position.x + char.velocity.x * time;
+            char.position.y = char.position.y + char.velocity.y * time;
+        })
+    }
+
+    //gravity
+    for(let char of chars){
+        char.callbacks.push( (time) => {
+            char.velocity.y = char.velocity.y + 0.00009 * time;
+        })
+    }
+    
+    //air resistance
+    for(let char of chars){
+        char.callbacks.push( (time) => {
+            char.velocity.y = char.velocity.y + 
+                ((0.001 * char.velocity.y * char.velocity.y ) / spacing[char.char]) * 
+                time ;
+        })
+    }
+    
+    //bounce
+    for(let char of chars){
+        char.callbacks.push( (time) => {
+            if(char.position.y > 700){
+                char.velocity.y = -0.7 * char.velocity.y;
+            }
+        })
+    }
+
+    startx = 80;
+    starty = 10;
+    cellSize=10
+    
+    function calcDest(){
+        for(const elem of data["1"]["pixel_coordinates"]){
+            x = startx+elem[1]*cellSize
+            y = starty+elem[0]*cellSize
+            let no = Math.floor(Math.random()* 999)
+            chars[no].velocity.x = (y - chars[no].position.x) / 2000 * -1
+            chars[no].velocity.y = (x - chars[no].position.y) / 2000 * -1
+            chars[no].callbacks = [
+                (time) => {
+                    char.position.x = char.position.x + char.velocity.x * time;
+                    char.position.y = char.position.y + char.velocity.y * time;
+                }
+            ]
+        }
+    }
+
+    
+    let frame = 1;
+    let timeout;
+    let audio = new Audio('test.mp3')
+
+    function play_5_fps(){
+        frame++;
+        if(frame > 120) {
+            clearTimeout(timeout)
+            ctx.clearRect(0, 0, 700, 700);
+
+            page = new Page(ctx, {x: 120, y: 50});
+            page.render()
+            audio.pause();
+            return;
+        };
+        let currFrameData = data[frame.toString()]
+        
+        ctx.clearRect(0, 0, 700, 700);
+        for(char of chars){
+            char.position.y = 700;            
+        }
+        for(const elem of currFrameData["pixel_coordinates"]){
+            let no = Math.floor(Math.random()* 999)
+            chars[no].position.y = startx+elem[1]*cellSize
+            chars[no].position.x = starty+elem[0]*cellSize
+            chars[no].render();
+        }
+        timeout = setTimeout(play_5_fps, 1000/5);
+
+    }
+
+    function first(){
+        calcDest("1")
+        requestAnimationFrame(animate);
+        let start, prevtime;
+        function animate(time, total_time){
+            if(start === undefined){
+                start = time;
+            }
+            const elapsed = time - start;
+            if(prevtime){
+                ctx.clearRect(0, 0, 700, 700);
+                for(char of chars){
+                    char.update(prevtime-time);
+                    char.render();
+                }
+            }
+            if(elapsed < 2000){
+                prevtime = time;
+                requestAnimationFrame(animate);
+            }else{
+                
+                for(char of chars){
+                    char.callbacks = [];
+                    char.update(prevtime-time);
+                    
+                }
+                play_5_fps();
+            }
+        }
+    }
+
+    function lol(){
+        audio.play()
+        requestAnimationFrame(animate);
+        let start, prevtime;
+        function animate(time){
+            if(start === undefined){
+                start = time;
+            }
+            const elapsed = time - start;
+            if(prevtime){
+                ctx.clearRect(0, 0, 700, 700);
+                for(char of chars){
+                    char.update(prevtime-time);
+                    char.render();
+                }
+            }
+            if(elapsed < 6000){
+                prevtime = time;
+                requestAnimationFrame(animate);
+            }else{
+                first()
+            }
+        }
+    }
+
+    document.onkeypress = function (e) {
+        e = e || window.event;
+        if(e.keyCode == 32){
+            lol()
+        }
+    };
+</script>

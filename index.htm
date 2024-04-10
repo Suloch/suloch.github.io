@@ -7,7 +7,7 @@
 
 
         
-        <div style="margin-top: 40px; display: flex; justify-content: center;">
+        <div ondblclick="lol()" style="margin-top: 40px; display: flex; justify-content: center;">
             <canvas id="testCanvas" width="700" height="700" style=" border: 1px solid black;"></canvas>
         </div>
     </body>
@@ -106,7 +106,7 @@
         height: 30,
     };
     var canvas = document.getElementById("testCanvas");
-        canvas.addEventListener('click', function(evt) {
+    canvas.addEventListener('click', function(evt) {
         var mousePos = getMousePos(canvas, evt);
 
         if (isInside(mousePos, gallery_rect)) {
@@ -115,7 +115,9 @@
             window.location.href ='gallery.html';
         }
         }, 
-    false);
+        false
+    );
+
 
     var ctx = canvas.getContext("2d");
 
@@ -390,6 +392,7 @@
     let frame = 1;
     let timeout;
     let audio = new Audio('test.mp3')
+    let playing = false;
 
     function play_5_fps(){
         frame++;
@@ -400,6 +403,7 @@
             page = new Page(ctx, {x: 120, y: 100});
             page.render()
             audio.pause();
+            playing = false;
             return;
         };
         let currFrameData = data[frame.toString()]
@@ -450,6 +454,9 @@
     }
 
     function lol(){
+        if(playing)
+            return
+        playing = true;
         audio.currentTime = 0
         audio.play()
         frame = 1
@@ -480,7 +487,7 @@
     document.onkeypress = function (e) {
         e = e || window.event;
         if(e.keyCode == 32){
-            lol()
+                lol()
         }
     };
 </script>
